@@ -26,7 +26,7 @@
                 <div class="col-2 hour">
                 9 am
                 </div>
-                <textarea class="col-9 nine" id="eventSave" value=9>
+                <textarea class="col-9 nine hour9" id="eventSave">
 
               </textarea>
                 <button onclick="storeData()" class="col-1 saveBtn">SAVE</button>
@@ -35,7 +35,7 @@
                 <div class="col-2 hour">
                 10 am
                 </div>
-                <textarea class="col-9 ten" id="eventSave" value=10>
+                <textarea class="col-9 ten hour10" id="eventSave">
 
                 </textarea>
                 <button onclick="storeData()" class="col-1 saveBtn">SAVE</button>
@@ -44,7 +44,7 @@
                 <div class="col-2 hour">
                 11 am
                 </div>
-                <textarea class="col-9 eleven" id="eventSave" value=11>
+                <textarea class="col-9 eleven hour11" id="eventSave">
 
                 </textarea>
                 <button onclick="storeData()" class="col-1 saveBtn">SAVE</button>
@@ -53,7 +53,7 @@
                 <div class="col-2 hour">
                 12 pm
                 </div>
-                <textarea class="col-9 twelve" id="eventSave" value=12>
+                <textarea class="col-9 twelve hour12" id="eventSave">
 
                 </textarea>
                 <button onclick="storeData()" class="col-1 saveBtn">SAVE</button>
@@ -62,7 +62,7 @@
                 <div class="col-2 hour">
                 1 pm
                 </div>
-                <textarea class="col-9 one" id="eventSave" value=13>
+                <textarea class="col-9 one hour13" id="eventSave">
 
                 </textarea>
                 <button onclick="storeData()" class="col-1 saveBtn">SAVE</button>
@@ -71,7 +71,7 @@
                 <div class="col-2 hour">
                 2 pm
                 </div>
-                <textarea class="col-9 two" id="eventSave" value=14>
+                <textarea class="col-9 two hour14" id="eventSave">
 
                 </textarea>
                 <button onclick="storeData()" class="col-1 saveBtn">SAVE</button>
@@ -80,7 +80,7 @@
                 <div class="col-2 hour">
                 3 pm
                 </div>
-                <textarea class="col-9 three" id="eventSave" value=15>
+                <textarea class="col-9 three hour15" id="eventSave">
 
                 </textarea>
                 <button onclick="storeData()" class="col-1 saveBtn">SAVE</button>
@@ -89,7 +89,7 @@
                 <div class="col-2 hour">
                 4 pm
                 </div>
-                <textarea class="col-9 four" id="eventSave" value=16>
+                <textarea class="col-9 four hour16" id="eventSave">
 
                 </textarea>
                 <button onclick="storeData()" class="col-1 saveBtn">SAVE</button>
@@ -98,7 +98,7 @@
                 <div class="col-2 hour">
                 5 pm
                 </div>
-                <textarea class="col-9 five" id="eventSave" value=17>
+                <textarea class="col-9 five hour17" id="eventSave">
 
                 </textarea>
                 <button onclick="storeData()" class="col-1 saveBtn">SAVE</button>
@@ -152,26 +152,29 @@
 
                 //if moment.js(h)=
             var currentHour = moment().format('HH');
-            var arrayTime = [9,10,11,12,13,14,15,16,17];
+            
 
-            for (let i = 0; i < arrayTime.length; i++) {
-                const element = arrayTime[i];
+            for( let i = 9; i < 18; i++ ) {
+                var elementToCheck = $(".hour" + i)
                 
-              if (value=== currentHour) {
-                  $(this).addClass("present")
-              } else if (value>currentHour){
-                $(this).addClass("future")
+              if (i === currentHour) {
+                  elementToCheck.addClass("present")
+              } else if (i>currentHour){
+                elementToCheck.addClass("future")
               } else {
-                $(this).addClass("past")
+                elementToCheck.addClass("past")
               };
             }
                 // json.stringify   ----JSON.parse
 
-                
+                $(".saveBtn").on('click', function() {
+                    var timeslots = localStorage.getItem(' object');
+                    timeslots["9"] = $(this).val()
+                })
                 
                 //Save event, it is stored in the local storage
                 function storeData(){
-                    var timeSlots = {name:".nine",name:".ten",name:".eleven",name:".twelve",name:".one",name:".two",name:".three",name:".four",name:".five"};
+                    var timeSlots = {9:".nine",10:".ten",name:".eleven",name:".twelve",name:".one",name:".two",name:".three",name:".four",name:".five"};
                     localStorage.setItem('object',JSON.stringify(timeSlots));
                     JSON.parse(localStorage.getItem('object'));
                 };
